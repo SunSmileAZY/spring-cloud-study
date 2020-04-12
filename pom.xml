@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>spring-cloud-demo</groupId>
+    <artifactId>spring-cloud-demo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>micro-order</module>
+        <module>spring-cloud-eureka</module>
+        <module>micro-web</module>
+        <module>config-apollo</module>
+        <module>spring-cloud-zuul</module>
+        <module>spring-cloud-config</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring.cloud.version>Hoxton.SR1</spring.cloud.version>
+        <spring.tx.version>5.0.8.RELEASE</spring.tx.version>
+        <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
+        <springfox.swagger.ui.version>2.9.2</springfox.swagger.ui.version>
+        <fastjson.version>1.2.49</fastjson.version>
+        <druid.version>1.1.10</druid.version>
+        <mysql.connector.java.version>8.0.12</mysql.connector.java.version>
+        <mybatis.plus.version>3.0-RELEASE</mybatis.plus.version>
+        <mybatis.plus.boot.starter.version>3.0-RELEASE</mybatis.plus.boot.starter.version>
+        <hibernate.validator.version>6.0.12.Final</hibernate.validator.version>
+        <wexin.java.version>3.1.5.BETA</wexin.java.version>
+        <commons.beanutils.version>1.9.3</commons.beanutils.version>
+        <hutool.all.version>4.1.13</hutool.all.version>
+        <poi.version>3.17</poi.version>
+        <alipay.sdk.java.version>3.3.49.ALL</alipay.sdk.java.version>
+        <ehcache.version>2.10.5</ehcache.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 监控健康状态 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</project>
