@@ -15,6 +15,7 @@
         <module>config-apollo</module>
         <module>spring-cloud-zuul</module>
         <module>spring-cloud-config</module>
+        <module>spring-boot-starter-demo</module>
     </modules>
 
     <parent>

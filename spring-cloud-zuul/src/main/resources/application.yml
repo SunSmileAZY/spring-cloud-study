@@ -3,15 +3,21 @@ spring:
     name: spring-cloud-zuul
 server:
   port: 5555
+
+# 不配置路由规则默认是服务名。如：http://127.0.0.1:5555/micro-web/user/queryUser
 zuul:
+  ignored-services: '*' # 关闭默认路由规则, 不想暴露的接口
   routes:
     api-a:
-      path: /api-a/**
-      serviceId: MICRO-WEB
+      path: /micro-web/**
+      serviceId: micro-web
     api-b:
-      path: /api-b/**
-      serviceId: MICRO-ORDER
+      path: /micro-order/**
+      serviceId: micro-order
+  ignored-patterns: ['/micro-a/**','/micro-b/**'] # 忽略某些路径
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://admin:admin@localhost:8763/eureka/
+
