@@ -1,9 +1,11 @@
 package com.pine.cloud.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.netflix.hystrix.strategy.concurrency.HystrixRequestContext;
 import com.pine.cloud.bean.ConsultContent;
 import com.pine.cloud.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -17,6 +19,7 @@ import rx.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -118,5 +121,17 @@ public class UserController {
     @RequestMapping(value = "/db/{can}", method = RequestMethod.GET)
     public void setDb(@PathVariable boolean can) {
         canVisitDb = can;
+    }
+
+
+    @RequestMapping("/test/hystrixCollapser")
+    public void test() throws ExecutionException, InterruptedException {
+        //开启上下文TheardLocal
+        HystrixRequestContext context = HystrixRequestContext.initializeContext();
+        Future<String> demo1 = userService.test("a");
+        Future<String> demo2 = userService.test("b");
+        System.out.println(demo1.get());
+        System.out.println(demo2.get());
+        context.close();
     }
 }

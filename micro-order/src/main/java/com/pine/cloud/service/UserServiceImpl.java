@@ -14,11 +14,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	CommonMapper mapper;
+//	@Autowired
+//	CommonMapper mapper;
 
 	@Override
 	public List<ConsultContent> queryContent() {
-		return mapper.queryContent(new HashMap());
+//		return mapper.queryContent(new HashMap());
+		return null;
 	}
 }

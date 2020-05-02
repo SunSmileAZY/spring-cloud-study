@@ -1,6 +1,7 @@
 package com.pine.cloud.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCollapser;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.netflix.hystrix.contrib.javanica.annotation.ObservableExecutionMode;
@@ -8,6 +9,7 @@ import com.netflix.hystrix.contrib.javanica.command.AsyncResult;
 import com.pine.cloud.bean.ConsultContent;
 import com.pine.cloud.bean.ZgGoods;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -22,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Service
-@Scope(proxyMode = ScopedProxyMode.INTERFACES)
+//@Scope(proxyMode = ScopedProxyMode.INTERFACES)
 public class UserServiceImpl implements UserService {
 
     private AtomicInteger s = new AtomicInteger();
@@ -144,6 +146,7 @@ public class UserServiceImpl implements UserService {
 
         return Observable.create(new Observable.OnSubscribe<String>() {
 
+            @Override
             public void call(Subscriber<? super String> observer) {
                 log.info("==================="
                         + Thread.currentThread().getName() + "================");
@@ -171,5 +174,27 @@ public class UserServiceImpl implements UserService {
 
     public Observable<String> exceptionHandler() {
         return Observable.just("我错了！！！");
+    }
+
+
+    @HystrixCollapser(batchMethod = "testAll", scope = com.netflix.hystrix.HystrixCollapser.Scope.REQUEST,
+            collapserProperties = {
+            @HystrixProperty(name = "timerDelayInMilliseconds", value = "300000")
+    })
+    @Override
+    public Future<String> test(String a) {
+        return null;
+    }
+
+    @HystrixCommand(fallbackMethod = "testAllFallBack")
+    public List<String> testAll(List<String> a) {
+        log.info("合并操作线程 --> {} --> params --> {}", Thread.currentThread().getName(), a);
+        return  restTemplate.getForObject("http://"
+                + SERVIER_NAME + "/user/queryContent", List.class);
+    }
+
+    public List<String> testAllFallBack(List<String> a) {
+        log.info("testAllFallBack");
+        return null;
     }
 }

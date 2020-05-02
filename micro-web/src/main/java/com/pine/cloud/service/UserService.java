@@ -15,5 +15,7 @@ public interface UserService {
 
     String queryMonitor();
 
-    public Observable<String> mergeResult();
+    Observable<String> mergeResult();
+
+    Future<String> test(String a);
 }

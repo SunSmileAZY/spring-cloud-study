@@ -95,7 +95,6 @@ public class FileCalculator {
         String path = "C:\\Users\\Acer\\Desktop\\linuxdownload";
         File file = new File(path);
         print(file);
-        AbstractQueuedLongSynchronizer
     }
 
 }

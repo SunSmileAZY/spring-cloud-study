@@ -14,8 +14,8 @@ public class TomcatCfig implements WebServerFactoryCustomizer<TomcatServletWebSe
     @Override
     public void customize(TomcatServletWebServerFactory factory) {
 
-        factory.setContextPath("/demo");
-        factory.setPort(8090);
-        factory.setProtocol("NIO");
+//        factory.setContextPath("/demo");
+//        factory.setPort(8086);
+//        factory.setProtocol("NIO");
     }
 }
