@@ -31,7 +31,7 @@ public class MicroWebApplication {
 
     /**
      * Ribbon 开启用来做远程调用
-     * Ribbon就是从本地列表来进行调用
+     * Ribbon 就是从本地列表来进行调用
      * @return
      */
     @Bean

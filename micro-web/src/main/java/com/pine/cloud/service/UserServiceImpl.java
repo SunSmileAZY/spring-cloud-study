@@ -177,9 +177,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @HystrixCollapser(batchMethod = "testAll", scope = com.netflix.hystrix.HystrixCollapser.Scope.REQUEST,
+    @HystrixCollapser(batchMethod = "testAll",
             collapserProperties = {
-            @HystrixProperty(name = "timerDelayInMilliseconds", value = "300000")
+            @HystrixProperty(name = "timerDelayInMilliseconds", value = "3000")
     })
     @Override
     public Future<String> test(String a) {
@@ -190,7 +190,7 @@ public class UserServiceImpl implements UserService {
     public List<String> testAll(List<String> a) {
         log.info("合并操作线程 --> {} --> params --> {}", Thread.currentThread().getName(), a);
         return  restTemplate.getForObject("http://"
-                + SERVIER_NAME + "/user/queryContent", List.class);
+                + SERVIER_NAME + "/user/queryContent?a={1}",List.class, StringUtils.join(a, ","));
     }
 
     public List<String> testAllFallBack(List<String> a) {
