@@ -16,6 +16,7 @@
         <module>spring-cloud-zuul</module>
         <module>spring-cloud-config</module>
         <module>spring-boot-starter-demo</module>
+        <module>spring-cloud-gateway</module>
     </modules>
 
     <parent>
@@ -62,10 +63,10 @@
     </dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-web</artifactId>-->
+        <!--</dependency>-->
         <!-- 监控健康状态 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

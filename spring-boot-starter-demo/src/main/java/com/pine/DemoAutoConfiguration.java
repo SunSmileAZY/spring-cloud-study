@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnWebApplication
 @EnableConfigurationProperties(DemoProperties.class)
-@EnableAutoConfiguration
 public class DemoAutoConfiguration {
 
     @Autowired
