@@ -8,10 +8,14 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: bmicro-we
-          uri: http://micro-web
+        - id: micro-web
+          uri: lb://micro-web
           predicates:
-          - Path= /micro-web/**
+            - Path=/micro-web/**
+        - id: micro-order
+          uri: lb://micro-order
+          predicates:
+            - Path=/micro-order/**
 
 server:
   port: 6666
