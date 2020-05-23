@@ -17,6 +17,7 @@
         <module>spring-cloud-config</module>
         <module>spring-boot-starter-demo</module>
         <module>spring-cloud-gateway</module>
+        <module>demo-other</module>
     </modules>
 
     <parent>

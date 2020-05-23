@@ -87,6 +87,13 @@ public class UserServiceImpl implements UserService {
         return results;
     }
 
+    public List<ConsultContent> queryContentsFallback() {
+        f.incrementAndGet();
+        log.info("===============queryContentsFallback=================");
+
+        return null;
+    }
+
     @HystrixCommand(fallbackMethod = "queryContentsAsynFallback")
     @Override
     public Future<String> queryContentsAsyn() {
@@ -114,13 +121,6 @@ public class UserServiceImpl implements UserService {
         List<ConsultContent> results = restTemplate.getForObject("http://"
                 + SERVIER_NAME + "/user/queryContent", List.class);
         return results;
-    }
-
-    public List<ConsultContent> queryContentsFallback() {
-        f.incrementAndGet();
-        log.info("===============queryContentsFallback=================");
-
-        return null;
     }
 
     @Override
