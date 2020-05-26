@@ -9,15 +9,15 @@ zuul:
   ignored-services: '*' # 关闭默认路由规则, 不想暴露的接口
   routes:
     api-a:
-      path: /micro-web/**
-      serviceId: micro-web
+      path: /swell/**
+      serviceId: http://127.0.0.1:20000
     api-b:
       path: /micro-order/**
       serviceId: micro-order
-  ignored-patterns: ['/micro-a/**','/micro-b/**'] # 忽略某些路径
+#  ignored-patterns: ['/micro-a/**','/micro-b/**'] # 忽略某些路径
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://admin:admin@localhost:8763/eureka/
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://admin:admin@localhost:8763/eureka/
 

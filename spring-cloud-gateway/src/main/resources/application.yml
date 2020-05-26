@@ -8,14 +8,14 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: micro-web
-          uri: lb://micro-web
+        - id: swell
+          uri: http://127.0.0.1:20000
           predicates:
-            - Path=/micro-web/**
-        - id: micro-order
-          uri: lb://micro-order
+            - Path=/swell/**
+        - id: wallet
+          uri: http://127.0.0.1:9222
           predicates:
-            - Path=/micro-order/**
+            - Path=/wallet/**
 
 server:
   port: 6666
