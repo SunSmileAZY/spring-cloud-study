@@ -14,6 +14,9 @@ zuul:
     api-b:
       path: /micro-order/**
       serviceId: micro-order
+    api-b:
+      path: /micro-web/**
+      serviceId: micro-web
 #  ignored-patterns: ['/micro-a/**','/micro-b/**'] # 忽略某些路径
 
 #eureka:

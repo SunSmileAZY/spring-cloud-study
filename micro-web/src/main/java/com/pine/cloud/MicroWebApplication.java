@@ -1,11 +1,13 @@
 package com.pine.cloud;
 
+import com.pine.cloud.service.KafkaSender;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.web.client.RestTemplate;
@@ -26,7 +28,25 @@ import org.springframework.web.client.RestTemplate;
 public class MicroWebApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MicroWebApplication.class,args);
+
+        ConfigurableApplicationContext context = SpringApplication.run(MicroWebApplication.class, args);
+
+        sendKafka(context);
+    }
+
+    private static void sendKafka(ConfigurableApplicationContext context) {
+        KafkaSender sender = context.getBean(KafkaSender.class);
+
+        for (int i = 0; i < 10; i++) {
+            //调用消息发送类中的消息发送方法
+            sender.send();
+
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
